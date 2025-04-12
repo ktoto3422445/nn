@@ -171,6 +171,16 @@
             margin-right: 1rem;
         }
 
+        .language-select {
+            background-color: #303030;
+            color: #fff;
+            border: none;
+            padding: 0.3rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            margin-left: 2rem;
+        }
+
         .sidebar {
             width: clamp(4.5rem, 15vw, 15rem);
             background-color: #212121;
@@ -616,7 +626,7 @@
             </div>
         </div>
         <div class="search-bar">
-            <input type="text" placeholder="Пошук">
+            <input type="text" id="search-input" placeholder="Пошук">
             <button class="search-btn"><img src="https://images.icon-icons.com/2621/PNG/96/gui_search_icon_157039.png" alt="Пошук" style="width: 30px; height: 30px;"></button>
         </div>
         <div class="header-right">
@@ -630,36 +640,42 @@
                     <div class="section user-info">
                         <p><strong id="menu-channel-name">Ви ще не створили канал</strong></p>
                         <p id="menu-account-name"></p>
-                        <a href="https://ktoto3422445.github.io/nn/profile.html">Переглянути канал</a>
+                        <a href="https://ktoto3422445.github.io/nn/profile.html" id="view-channel-link">Переглянути канал</a>
                     </div>
                     <div class="section">
                         <a href="https://myaccount.google.com" target="_blank" class="item">
-                            <span class="material-icons">account_circle</span>Обліковий запис Google
+                            <span class="material-icons">account_circle</span><span id="google-account">Обліковий запис Google</span>
                         </a>
-                        <div class="item"><span class="material-icons">switch_account</span>Змінити обліковий запис
-                        </div>
-                        <div class="item" id="logout-link"><span class="material-icons">logout</span>Вийти</div>
+                        <div class="item"><span class="material-icons">switch_account</span><span id="switch-account">Змінити обліковий запис</span></div>
+                        <div class="item" id="logout-link"><span class="material-icons">logout</span><span id="logout-text">Вийти</span></div>
                     </div>
                     <div class="section">
                         <a href="https://ktoto3422445.github.io/nn/studioyoutube.html" class="item">
-                            <span class="material-icons">video_settings</span>Творча студія YouTube
+                            <span class="material-icons">video_settings</span><span id="youtube-studio">Творча студія YouTube</span>
                         </a>
-                        <div class="item"><span class="material-icons">paid</span>Покупки і платні підписки</div>
+                        <div class="item"><span class="material-icons">paid</span><span id="purchases">Покупки і платні підписки</span></div>
                     </div>
                     <div class="section">
                         <a href="https://ktoto3422445.github.io/nn/profile.html" class="item">
-                            <span class="material-icons">person</span>Ваші дані на YouTube
+                            <span class="material-icons">person</span><span id="your-data">Ваші дані на YouTube</span>
                         </a>
-                        <div class="item"><span class="material-icons">brightness_6</span>Тема: як на пристрої</div>
-                        <div class="item"><span class="material-icons">language</span>Мова: Українська</div>
-                        <div class="item"><span class="material-icons">visibility_off</span>Безпечний режим: вимк.</div>
-                        <div class="item"><span class="material-icons">flag</span>Країна: Україна</div>
-                        <div class="item"><span class="material-icons">keyboard</span>Швидкі клавіші</div>
+                        <div class="item"><span class="material-icons">brightness_6</span><span id="theme">Тема: як на пристрої</span></div>
+                        <div class="item">
+                            <span class="material-icons">language</span>
+                            <span id="language-label">Мова:</span>
+                            <select id="language-select" class="language-select">
+                                <option value="uk">Українська</option>
+                                <option value="ru">Русский</option>
+                            </select>
+                        </div>
+                        <div class="item"><span class="material-icons">visibility_off</span><span id="safe-mode">Безпечний режим: вимк.</span></div>
+                        <div class="item"><span class="material-icons">flag</span><span id="country">Країна: Україна</span></div>
+                        <div class="item"><span class="material-icons">keyboard</span><span id="shortcuts">Швидкі клавіші</span></div>
                     </div>
                     <div class="section">
-                        <div class="item"><span class="material-icons">settings</span>Налаштування</div>
-                        <div class="item"><span class="material-icons">help</span>Довідка</div>
-                        <div class="item"><span class="material-icons">feedback</span>Надіслати відгук</div>
+                        <div class="item"><span class="material-icons">settings</span><span id="settings">Налаштування</span></div>
+                        <div class="item"><span class="material-icons">help</span><span id="help">Довідка</span></div>
+                        <div class="item"><span class="material-icons">feedback</span><span id="feedback">Надіслати відгук</span></div>
                     </div>
                 </div>
             </div>
@@ -667,66 +683,55 @@
     </header>
     <div class="sidebar">
         <a href="https://ktoto3422445.github.io/nn/" class="sidebar-item" style="text-decoration: none;">
-            <img src="https://img.icons8.com/ios-filled/50/000000/home.png" alt="Головна"
-                style="width:16px; height:16px; vertical-align:middle; margin-right:5px;">Головна
+            <img src="https://img.icons8.com/ios-filled/50/000000/home.png" alt="Головна" style="width:16px; height:16px; vertical-align:middle; margin-right:5px;"><span id="sidebar-home">Головна</span>
         </a>
         <a href="#" class="sidebar-item" style="text-decoration: none;">
-            <img src="https://img.icons8.com/color/48/youtube-shorts.png" alt="Shorts"
-                style="width:16px; height:16px; vertical-align:middle; margin-right:5px;">Shorts
+            <img src="https://img.icons8.com/color/48/youtube-shorts.png" alt="Shorts" style="width:16px; height:16px; vertical-align:middle; margin-right:5px;"><span id="sidebar-shorts">Shorts</span>
         </a>
         <a href="#" class="sidebar-item" style="text-decoration: none;">
-            <img src="https://img.icons8.com/ios-filled/50/000000/subscription.png" alt="Підписки"
-                style="width:16px; height:16px; vertical-align:middle; margin-right:5px;">Підписки
+            <img src="https://img.icons8.com/ios-filled/50/000000/subscription.png" alt="Підписки" style="width:16px; height:16px; vertical-align:middle; margin-right:5px;"><span id="sidebar-subscriptions">Підписки</span>
         </a>
         <a href="#" class="sidebar-item" style="text-decoration: none;">
-            <img src="https://img.icons8.com/ios-filled/50/000000/library.png" alt="Бібліотека"
-                style="width:16px; height:16px; vertical-align:middle; margin-right:5px;">Бібліотека
+            <img src="https://img.icons8.com/ios-filled/50/000000/library.png" alt="Бібліотека" style="width:16px; height:16px; vertical-align:middle; margin-right:5px;"><span id="sidebar-library">Бібліотека</span>
         </a>
         <hr>
         <a href="#" class="sidebar-item" style="text-decoration: none;">
-            <img src="https://img.icons8.com/ios-filled/50/000000/time-machine.png" alt="Історія"
-                style="width:16px; height:16px; vertical-align:middle; margin-right:5px;">Історія
+            <img src="https://img.icons8.com/ios-filled/50/000000/time-machine.png" alt="Історія" style="width:16px; height:16px; vertical-align:middle; margin-right:5px;"><span id="sidebar-history">Історія</span>
         </a>
         <a href="#" class="sidebar-item" style="text-decoration: none;">
-            <img src="https://img.icons8.com/ios-filled/50/000000/video.png" alt="Ваші відео"
-                style="width:16px; height:16px; vertical-align:middle; margin-right:5px;">Ваші відео
+            <img src="https://img.icons8.com/ios-filled/50/000000/video.png" alt="Ваші відео" style="width:16px; height:16px; vertical-align:middle; margin-right:5px;"><span id="sidebar-your-videos">Ваші відео</span>
         </a>
         <a href="#" class="sidebar-item" style="text-decoration: none;">
-            <img src="https://img.icons8.com/ios-filled/50/000000/watch-later.png" alt="Переглянути пізніше"
-                style="width:16px; height:16px; vertical-align:middle; margin-right:5px;">Переглянути пізніше
+            <img src="https://img.icons8.com/ios-filled/50/000000/watch-later.png" alt="Переглянути пізніше" style="width:16px; height:16px; vertical-align:middle; margin-right:5px;"><span id="sidebar-watch-later">Переглянути пізніше</span>
         </a>
         <hr>
-         <a href="https://ktoto342244.github.io/nn/papularyri.html" class="sidebar-item" style="text-decoration: none;">
-            <img src="https://cdn-icons-png.flaticon.com/512/346/346880.png" alt="films"
-                style="width:16px; height:16px; vertical-align:middle; margin-right:5px;">Популярно
+        <a href="https://ktoto342244.github.io/nn/papularyri.html" class="sidebar-item" style="text-decoration: none;">
+            <img src="https://cdn-icons-png.flaticon.com/512/346/346880.png" alt="films" style="width:16px; height:16px; vertical-align:middle; margin-right:5px;"><span id="sidebar-popular">Популярно</span>
         </a>
         <a href="#" class="sidebar-item" style="text-decoration: none;">
-            <img src="https://img.icons8.com/ios-filled/50/000000/musical-notes.png" alt="Музика"
-                style="width:16px; height:16px; vertical-align:middle; margin-right:5px;">Музика
+            <img src="https://img.icons8.com/ios-filled/50/000000/musical-notes.png" alt="Музика" style="width:16px; height:16px; vertical-align:middle; margin-right:5px;"><span id="sidebar-music">Музика</span>
         </a>
         <a href="#" class="sidebar-item" style="text-decoration: none;">
-            <img src="https://img.icons8.com/ios-filled/50/000000/controller.png" alt="Відеоігри"
-                style="width:16px; height:16px; vertical-align:middle; margin-right:5px;">Відеоігри
+            <img src="https://img.icons8.com/ios-filled/50/000000/controller.png" alt="Відеоігри" style="width:16px; height:16px; vertical-align:middle; margin-right:5px;"><span id="sidebar-gaming">Відеоігри</span>
         </a>
         <a href="https://ktoto3422445.github.io/nn/film.html" class="sidebar-item" style="text-decoration: none;">
-            <img src="https://img.icons8.com/ios-filled/50/000000/films.png" alt="films"
-                style="width:16px; height:16px; vertical-align:middle; margin-right:5px;">Фільми
+            <img src="https://img.icons8.com/ios-filled/50/000000/films.png" alt="films" style="width:16px; height:16px; vertical-align:middle; margin-right:5px;"><span id="sidebar-movies">Фільми</span>
         </a>
         <a href="https://ktoto3422445.github.io/nn/profile.html" class="sidebar-item" id="profile-link">
             <img src="https://cdn-icons-png.flaticon.com/128/309/309492.png" alt="icon">
-            <span>Ви</span>
+            <span id="sidebar-you">Ви</span>
         </a>
     </div>
 
     <main>
         <div class="nav-bar">
-            <div class="nav-item active">Усе</div>
-            <div class="nav-item">Відео</div>
-            <div class="nav-item">Музика</div>
-            <div class="nav-item">Новини</div>
-            <div class="nav-item">Сейви в шортах</div>
-            <div class="nav-item">Живі трансляції</div>
-            <div class="nav-item"><a href="film.html"></a>Фільми</div>
+            <div class="nav-item active" id="nav-all">Усе</div>
+            <div class="nav-item" id="nav-videos">Відео</div>
+            <div class="nav-item" id="nav-music">Музика</div>
+            <div class="nav-item" id="nav-news">Новини</div>
+            <div class="nav-item" id="nav-shorts-saves">Сейви в шортах</div>
+            <div class="nav-item" id="nav-live">Живі трансляції</div>
+            <div class="nav-item"><a href="film.html" id="nav-movies"></a>Фільми</div>
         </div>
 
         <section class="video-grid">
@@ -738,10 +743,9 @@
                     <img src="https://yt3.ggpht.com/pwjrFes5-0Ig3XM6NRrzBGlV4frvpaeoSkC1aMdher1hMWZJxL6ZlNcB3gjtqti_3shpJNRI=s68-c-k-c0x00ffffff-no-rj"
                         alt="Машенька channel icon" class="channel-icon">
                     <div class="video-details">
-                        <h3><a href="https://ktoto3422445.github.io/nn/vidio/vidio1.html">СМЕРТЕЛЬНА КАПЛЯ в Майнкрафт!</a>
-                        </h3>
+                        <h3><a href="https://ktoto3422445.github.io/nn/vidio/vidio1.html" id="video-title-1">СМЕРТЕЛЬНА КАПЛЯ в Майнкрафт!</a></h3>
                         <p>Машенька [ Lia's bar + Функція]</p>
-                        <p>125 тис. переглядів • 11 годин тому</p>
+                        <p id="video-stats-1">125 тис. переглядів • 11 годин тому</p>
                     </div>
                 </div>
             </div>
@@ -753,10 +757,9 @@
                     <img src="https://yt3.ggpht.com/ytc/AIdro_lgZSW_3-BTK3Eh4etEOXijHcOhmwVDwNrRq69ZMFTJrmQ=s68-c-k-c0x00ffffff-no-rj"
                         alt="SuperCrastan channel icon" class="channel-icon">
                     <div class="video-details">
-                        <h3><a href="https://ktoto3422445.github.io/nn/vidio/vidio2 .html">ДОКУМЕНТИ: Кільцеві інструкції...</a>
-                        </h3>
+                        <h3><a href="https://ktoto3422445.github.io/nn/vidio/vidio2 .html" id="video-title-2">ДОКУМЕНТИ: Кільцеві інструкції...</a></h3>
                         <p>SuperCrastan</p>
-                        <p>164 тис. переглядів • 7 годин тому</p>
+                        <p id="video-stats-2">164 тис. переглядів • 7 годин тому</p>
                     </div>
                 </div>
             </div>
@@ -768,10 +771,9 @@
                     <img src="https://yt3.ggpht.com/Nq1YdiBrSounSlRn5Aedrd2xOqqHI0JgmXOS6dGKVlTQO0cDEh-xJQJxhP6iDSxF4UoHK293wvE=s68-c-k-c0x00ffffff-no-rj"
                         alt="ексченджимонстр channel icon" class="channel-icon">
                     <div class="video-details">
-                        <h3><a href="https://ktoto3422445.github.io/nn/vidio/vidio3.html">Чи зарядив 1000 осіб вибух...</a>
-                        </h3>
+                        <h3><a href="https://ktoto3422445.github.io/nn/vidio/vidio3.html" id="video-title-3">Чи зарядив 1000 осіб вибух...</a></h3>
                         <p>ексченджимонстр</p>
-                        <p>1,6 млн переглядів • 4 тижні тому</p>
+                        <p id="video-stats-3">1,6 млн переглядів • 4 тижні тому</p>
                     </div>
                 </div>
             </div>
@@ -783,10 +785,9 @@
                     <img src="https://yt3.googleusercontent.com/0BOFKdjjEhFUkgdszOX5CiXQwIacgAncHanwqeJmIY5SdkznVjO2VXc9mUa0TZawwh-ENFx8gA=s160-c-k-c0x00ffffff-no-rj"
                         alt="ексченджимонстр channel icon" class="channel-icon">
                     <div class="video-details">
-                        <h3><a href="https://ktoto3422445.github.io/nn/vidio/vidio4.html">КС 2 я не можу це терпіти</a>
-                        </h3>
+                        <h3><a href="https://ktoto3422445.github.io/nn/vidio/vidio4.html" id="video-title-4">КС 2 я не можу це терпіти</a></h3>
                         <p>40 переглядів</p>
-                        <p>8 місяців тому</p>
+                        <p id="video-stats-4">8 місяців тому</p>
                     </div>
                 </div>
             </div>
@@ -798,11 +799,9 @@
                     <img src="https://yt3.ggpht.com/ytc/AIdro_nNlcSax_xEuMx3c5LxQG8QXkGEKzqrc0G8bXyMIoNdzD4=s68-c-k-c0x00ffffff-no-rj"
                         alt="ексченджимонстр channel icon" class="channel-icon">
                     <div class="video-details">
-                        <h3><a href="https://ktoto3422445.github.io/nn/vidio/vidio5.html">Ця школа проклята. (Усі аномалії в
-                                школі)</a>
-                        </h3>
+                        <h3><a href="https://ktoto3422445.github.io/nn/vidio/vidio5.html" id="video-title-5">Ця школа проклята. (Усі аномалії в школі)</a></h3>
                         <p>windy31</p>
-                        <p>757 тис. переглядів • 2 тижні тому</p>
+                        <p id="video-stats-5">757 тис. переглядів • 2 тижні тому</p>
                     </div>
                 </div>
             </div>
@@ -814,11 +813,9 @@
                     <img src="https://yt3.ggpht.com/Mii0Y31AqZRbwT6MD4WaG2K-rP2d-ik3yIgRJjCHCKx6cDnD_Lu3Db9bhsKgJ6tykgGJWw4uZg=s68-c-k-c0x00ffffff-no-rj"
                         alt="ексченджимонстр channel icon" class="channel-icon">
                     <div class="video-details">
-                        <h3><a href="https://ktoto3422445.github.io/nn/vidio/vidio6.html">🦠Я ЗАВАНТАЖИВ НАЙНЕБЕЗПЕЧНІШІ ВІРУСИ
-                                ІНТЕРНЕТУ</a>
-                        </h3>
+                        <h3><a href="https://ktoto3422445.github.io/nn/vidio/vidio6.html" id="video-title-6">🦠Я ЗАВАНТАЖИВ НАЙНЕБЕЗПЕЧНІШІ ВІРУСИ ІНТЕРНЕТУ</a></h3>
                         <p>Віллі</p>
-                        <p>844 тис. переглядів • 1 місяць тому</p>
+                        <p id="video-stats-6">844 тис. переглядів • 1 місяць тому</p>
                     </div>
                 </div>
             </div>
@@ -830,10 +827,9 @@
                     <img src="https://yt3.ggpht.com/mT3e_mKkmZY4iHeeCuZQcrtFYyIMdZ1hN5_UPg34Q1IbN-1NNiWyq_ZTAwUcXiR1neUh2DIoAak=s48-c-k-c0x00ffffff-no-rj"
                         alt="ексченджимонстр channel icon" class="channel-icon">
                     <div class="video-details">
-                        <h3><a href="https://ktoto3422445.github.io/nn/vidio/vidio7.html">Що, ЯКЩО З'єднати 5 ПИЛОСОСІВ?</a>
-                        </h3>
+                        <h3><a href="https://ktoto3422445.github.io/nn/vidio/vidio7.html" id="video-title-7">Що, ЯКЩО З'єднати 5 ПИЛОСОСІВ?</a></h3>
                         <p>Експериментатори</p>
-                        <p>996 тис. переглядів • 7 місяців тому</p>
+                        <p id="video-stats-7">996 тис. переглядів • 7 місяців тому</p>
                     </div>
                 </div>
             </div>
@@ -845,11 +841,9 @@
                     <img src="https://yt3.ggpht.com/pwjrFes5-0Ig3XM6NRrzBGlV4frvpaeoSkC1aMdher1hMWZJxL6ZlNcB3gjtqti_3shpJNRI=s68-c-k-c0x00ffffff-no-rj"
                         alt="ексченджимонстр channel icon" class="channel-icon">
                     <div class="video-details">
-                        <h3><a href="https://ktoto3422445.github.io/nn/vidio/vidio8.html">😱Я Додав СКРОМНИКА в Майнкрафт і він
-                                Утік з ЛАБОРАТОРІЇ.. НАЙСТРАШНІША ІСТОТА SCP-096</a>
-                        </h3>
+                        <h3><a href="https://ktoto3422445.github.io/nn/vidio/vidio8.html" id="video-title-8">😱Я Додав СКРОМНИКА в Майнкрафт і він Утік з ЛАБОРАТОРІЇ.. НАЙСТРАШНІША ІСТОТА SCP-096</a></h3>
                         <p>FixEye</p>
-                        <p>708 тис. переглядів • 2 місяці тому</p>
+                        <p id="video-stats-8">708 тис. переглядів • 2 місяці тому</p>
                     </div>
                 </div>
             </div>
@@ -861,10 +855,9 @@
                     <img src="https://yt3.ggpht.com/fa1UFruMcoISmrWA62-OJWXVHqJohtW8D9V0L38drlXjX-YS19bGRNXtm6CoPHczcgTwZgoVGw=s48-c-k-c0x00ffffff-no-rj"
                         alt="ексченджимонстр channel icon" class="channel-icon">
                     <div class="video-details">
-                        <h3><a href="https://ktoto3422445.github.io/nn/vidio/vidio9.html">😨 Сервер зі страшним гравцем Buddy (Страшний майнкрафт)</a>
-                        </h3>
+                        <h3><a href="https://ktoto3422445.github.io/nn/vidio/vidio9.html" id="video-title-9">😨 Сервер зі страшним гравцем Buddy (Страшний майнкрафт)</a></h3>
                         <p>Микита Берг</p>
-                        <p>371 тис. переглядів • 4 роки тому</p>
+                        <p id="video-stats-9">371 тис. переглядів • 4 роки тому</p>
                     </div>
                 </div>
             </div>
@@ -876,11 +869,9 @@
                     <img src="https://yt3.ggpht.com/ytc/AIdro_ksXY2REjZ6gYKSgnWT5jC_zT9mX900vyFtVinR8KbHww=s48-c-k-c0x00ffffff-no-rj"
                         alt="ексченджимонстр channel icon" class="channel-icon">
                     <div class="video-details">
-                        <h3><a href="https://ktoto3422445.github.io/nn/vidio/vidio10.html">Робот-Метальник «Млинців» - Наука
-                                Ідеального Метання «Млинців»</a>
-                        </h3>
+                        <h3><a href="https://ktoto3422445.github.io/nn/vidio/vidio10.html" id="video-title-10">Робот-Метальник «Млинців» - Наука Ідеального Метання «Млинців»</a></h3>
                         <p>Mark Rober</p>
-                        <p>24 млн переглядів • 6 років тому</p>
+                        <p id="video-stats-10">24 млн переглядів • 6 років тому</p>
                     </div>
                 </div>
             </div>
@@ -892,10 +883,9 @@
                     <img src="https://yt3.ggpht.com/ytc/AIdro_n5ecPCc4F7xADsX9Xp3qlAXUgwRVDZm5g5E3hXKqSuwvE=s48-c-k-c0x00ffffff-no-rj"
                         alt="іконка каналу ексченджимонстр" class="channel-icon">
                     <div class="video-details">
-                        <h3><a href="https://ktoto3422445.github.io/nn/vidio/vidio11.html">Мої Дитячі Травми 4 (анімація)</a>
-                        </h3>
+                        <h3><a href="https://ktoto3422445.github.io/nn/vidio/vidio11.html" id="video-title-11">Мої Дитячі Травми 4 (анімація)</a></h3>
                         <p>X2DED</p>
-                        <p>122 089 переглядів • 7 годин тому</p>
+                        <p id="video-stats-11">122 089 переглядів • 7 годин тому</p>
                     </div>
                 </div>
             </div>
@@ -907,10 +897,9 @@
                     <img src="https://yt3.ggpht.com/rhibxHMYX7stOQKUvclm1NT-4LOt6YJ0zseQx7SAuOY8_Mr8WLq0QDPdV-UM99yxE8I14IST=s48-c-k-c0x00ffffff-no-rj"
                         alt="іконка каналу ексченджимонстр" class="channel-icon">
                     <div class="video-details">
-                        <h3><a href="https://ktoto3422445.github.io/nn/vidio/vidio12.html">Губка Боб Квадратні Штани | 1 сезон 8
-                                серія | Nickelodeon Україна</a></h3>
+                        <h3><a href="https://ktoto3422445.github.io/nn/vidio/vidio12.html" id="video-title-12">Губка Боб Квадратні Штани | 1 сезон 8 серія | Nickelodeon Україна</a></h3>
                         <p>Nickelodeon Cyrillic</p>
-                        <p>33 млн переглядів • 7 років тому</p>
+                        <p id="video-stats-12">33 млн переглядів • 7 років тому</p>
                     </div>
                 </div>
             </div>
@@ -922,10 +911,9 @@
                     <img src="https://yt3.ggpht.com/3v0NQgaQU6BJMnHHg3JpdDigUY4l5zl8beYsXof8LqUAlR-wITK3pOzySE-jdzvZwWNnneKZ0w=s48-c-k-c0x00ffffff-no-rj"
                         alt="іконка каналу ексченджимонстр" class="channel-icon">
                     <div class="video-details">
-                        <h3><a href="https://ktoto3422445.github.io/nn/vidio/vidio13.html">ЯК ОБІГРАТИ ЛОХОТРОНИ, ЯКІ СТОЯТЬ У
-                                ПАРКАХ?</a></h3>
+                        <h3><a href="https://ktoto3422445.github.io/nn/vidio/vidio13.html" id="video-title-13">ЯК ОБІГРАТИ ЛОХОТРОНИ, ЯКІ СТОЯТЬ У ПАРКАХ?</a></h3>
                         <p>It's Mamix</p>
-                        <p>16 млн переглядів • 5 років тому</p>
+                        <p id="video-stats-13">16 млн переглядів • 5 років тому</p>
                     </div>
                 </div>
             </div>
@@ -937,10 +925,9 @@
                     <img src="https://yt3.ggpht.com/rufoth8eb6DCjhFsN8Imt0CT9Rk4rcEI5ZwJ_PjiXdNWpw3SzzfvUtTiB3Y3xBeNJ7vVjLs1OQ=s48-c-k-c0x00ffffff-no-rj"
                         alt="іконка каналу ексченджимонстр" class="channel-icon">
                     <div class="video-details">
-                        <h3><a href="https://ktoto3422445.github.io/nn/vidio/vidio14.html">Божевільний Half-Life 2 з модами</a>
-                        </h3>
+                        <h3><a href="https://ktoto3422445.github.io/nn/vidio/vidio14.html" id="video-title-14">Божевільний Half-Life 2 з модами</a></h3>
                         <p>Marmok</p>
-                        <p>2,3 млн переглядів • 6 місяців тому</p>
+                        <p id="video-stats-14">2,3 млн переглядів • 6 місяців тому</p>
                     </div>
                 </div>
             </div>
@@ -952,10 +939,9 @@
                     <img src="https://yt3.ggpht.com/ytc/AIdro_m5dTgJ2OOoH_W7hl88vS-XXUCURS8F14jurLeJDW8mwKM=s48-c-k-c0x00ffffff-no-rj"
                         alt="іконка каналу ексченджимонстр" class="channel-icon">
                     <div class="video-details">
-                        <h3><a href="https://ktoto3422445.github.io/nn/vidio/vidio15.html">Я так більше не можу... [Мінус 4
-                                ролики на місяць]</a></h3>
+                        <h3><a href="https://ktoto3422445.github.io/nn/vidio/vidio15.html" id="video-title-15">Я так більше не можу... [Мінус 4 ролики на місяць]</a></h3>
                         <p>MrLololoshka (Роман Фільченков)</p>
-                        <p>1 млн переглядів • 2 дні тому</p>
+                        <p id="video-stats-15">1 млн переглядів • 2 дні тому</p>
                     </div>
                 </div>
             </div>
@@ -988,6 +974,209 @@
         const menuChannelName = document.getElementById("menu-channel-name");
         const menuAccountName = document.getElementById("menu-account-name");
 
+        const translations = {
+            uk: {
+                searchPlaceholder: "Пошук",
+                login: "Увійти",
+                noChannel: "Ви ще не створили канал",
+                viewChannel: "Переглянути канал",
+                googleAccount: "Обліковий запис Google",
+                switchAccount: "Змінити обліковий запис",
+                logout: "Вийти",
+                youtubeStudio: "Творча студія YouTube",
+                purchases: "Покупки і платні підписки",
+                yourData: "Ваші дані на YouTube",
+                theme: "Тема: як на пристрої",
+                languageLabel: "Мова:",
+                safeMode: "Безпечний режим: вимк.",
+                country: "Країна: Україна",
+                shortcuts: "Швидкі клавіші",
+                settings: "Налаштування",
+                help: "Довідка",
+                feedback: "Надіслати відгук",
+                sidebarHome: "Головна",
+                sidebarShorts: "Shorts",
+                sidebarSubscriptions: "Підписки",
+                sidebarLibrary: "Бібліотека",
+                sidebarHistory: "Історія",
+                sidebarYourVideos: "Ваші відео",
+                sidebarWatchLater: "Переглянути пізніше",
+                sidebarPopular: "Популярно",
+                sidebarMusic: "Музика",
+                sidebarGaming: "Відеоігри",
+                sidebarMovies: "Фільми",
+                sidebarYou: "Ви",
+                navAll: "Усе",
+                navVideos: "Відео",
+                navMusic: "Музика",
+                navNews: "Новини",
+                navShortsSaves: "Сейви в шортах",
+                navLive: "Живі трансляції",
+                navMovies: "Фільми",
+                videoTitle1: "СМЕРТЕЛЬНА КАПЛЯ в Майнкрафт!",
+                videoStats1: "125 тис. переглядів • 11 годин тому",
+                videoTitle2: "ДОКУМЕНТИ: Кільцеві інструкції...",
+                videoStats2: "164 тис. переглядів • 7 годин тому",
+                videoTitle3: "Чи зарядив 1000 осіб вибух...",
+                videoStats3: "1,6 млн переглядів • 4 тижні тому",
+                videoTitle4: "КС 2 я не можу це терпіти",
+                videoStats4: "8 місяців тому",
+                videoTitle5: "Ця школа проклята. (Усі аномалії в школі)",
+                videoStats5: "757 тис. переглядів • 2 тижні тому",
+                videoTitle6: "🦠Я ЗАВАНТАЖИВ НАЙНЕБЕЗПЕЧНІШІ ВІРУСИ ІНТЕРНЕТУ",
+                videoStats6: "844 тис. переглядів • 1 місяць тому",
+                videoTitle7: "Що, ЯКЩО З'єднати 5 ПИЛОСОСІВ?",
+                videoStats7: "996 тис. переглядів • 7 місяців тому",
+                videoTitle8: "😱Я Додав СКРОМНИКА в Майнкрафт і він Утік з ЛАБОРАТОРІЇ.. НАЙСТРАШНІША ІСТОТА SCP-096",
+                videoStats8: "708 тис. переглядів • 2 місяці тому",
+                videoTitle9: "😨 Сервер зі страшним гравцем Buddy (Страшний майнкрафт)",
+                videoStats9: "371 тис. переглядів • 4 роки тому",
+                videoTitle10: "Робот-Метальник «Млинців» - Наука Ідеального Метання «Млинців»",
+                videoStats10: "24 млн переглядів • 6 років тому",
+                videoTitle11: "Мої Дитячі Травми 4 (анімація)",
+                videoStats11: "122 089 переглядів • 7 годин тому",
+                videoTitle12: "Губка Боб Квадратні Штани | 1 сезон 8 серія | Nickelodeon Україна",
+                videoStats12: "33 млн переглядів • 7 років тому",
+                videoTitle13: "ЯК ОБІГРАТИ ЛОХОТРОНИ, ЯКІ СТОЯТЬ У ПАРКАХ?",
+                videoStats13: "16 млн переглядів • 5 років тому",
+                videoTitle14: "Божевільний Half-Life 2 з модами",
+                videoStats14: "2,3 млн переглядів • 6 місяців тому",
+                videoTitle15: "Я так більше не можу... [Мінус 4 ролики на місяць]",
+                videoStats15: "1 млн переглядів • 2 дні тому",
+                logoutMessage: "Ви успішно вийшли з облікового запису.",
+                loginError: "Помилка входу. Спробуйте ще раз.",
+                logoutError: "Помилка виходу. Спробуйте ще раз."
+            },
+            ru: {
+                searchPlaceholder: "Поиск",
+                login: "Войти",
+                noChannel: "Вы еще не создали канал",
+                viewChannel: "Посмотреть канал",
+                googleAccount: "Аккаунт Google",
+                switchAccount: "Сменить аккаунт",
+                logout: "Выйти",
+                youtubeStudio: "Творческая студия YouTube",
+                purchases: "Покупки и платные подписки",
+                yourData: "Ваши данные на YouTube",
+                theme: "Тема: как на устройстве",
+                languageLabel: "Язык:",
+                safeMode: "Безопасный режим: выкл.",
+                country: "Страна: Россия",
+                shortcuts: "Горячие клавиши",
+                settings: "Настройки",
+                help: "Справка",
+                feedback: "Отправить отзыв",
+                sidebarHome: "Главная",
+                sidebarShorts: "Shorts",
+                sidebarSubscriptions: "Подписки",
+                sidebarLibrary: "Библиотека",
+                sidebarHistory: "История",
+                sidebarYourVideos: "Ваши видео",
+                sidebarWatchLater: "Смотреть позже",
+                sidebarPopular: "Популярно",
+                sidebarMusic: "Музыка",
+                sidebarGaming: "Видеоигры",
+                sidebarMovies: "Фильмы",
+                sidebarYou: "Вы",
+                navAll: "Все",
+                navVideos: "Видео",
+                navMusic: "Музыка",
+                navNews: "Новости",
+                navShortsSaves: "Сейвы в шортах",
+                navLive: "Прямые трансляции",
+                navMovies: "Фильмы",
+                videoTitle1: "СМЕРТЕЛЬНАЯ КАПЛЯ в Майнкрафт!",
+                videoStats1: "125 тыс. просмотров • 11 часов назад",
+                videoTitle2: "ДОКУМЕНТЫ: Кольцевые инструкции...",
+                videoStats2: "164 тыс. просмотров • 7 часов назад",
+                videoTitle3: "Зарядил ли 1000 человек взрыв...",
+                videoStats3: "1,6 млн просмотров • 4 недели назад",
+                videoTitle4: "КС 2 я не могу это терпеть",
+                videoStats4: "8 месяцев назад",
+                videoTitle5: "Эта школа проклята. (Все аномалии в школе)",
+                videoStats5: "757 тыс. просмотров • 2 недели назад",
+                videoTitle6: "🦠Я СКАЧАЛ САМЫЕ ОПАСНЫЕ ВИРУСЫ ИНТЕРНЕТА",
+                videoStats6: "844 тыс. просмотров • 1 месяц назад",
+                videoTitle7: "Что, ЕСЛИ Соединить 5 ПЫЛЕСОСОВ?",
+                videoStats7: "996 тыс. просмотров • 7 месяцев назад",
+                videoTitle8: "😱Я Добавил СКРОМНИКА в Майнкрафт и он Сбежал из ЛАБОРАТОРИИ.. САМОЕ СТРАШНОЕ СУЩЕСТВО SCP-096",
+                videoStats8: "708 тыс. просмотров • 2 месяца назад",
+                videoTitle9: "😨 Сервер со страшным игроком Buddy (Страшный майнкрафт)",
+                videoStats9: "371 тыс. просмотров • 4 года назад",
+                videoTitle10: "Робот-Бросатель «Блинов» - Наука Идеального Броска «Блинов»",
+                videoStats10: "24 млн просмотров • 6 лет назад",
+                videoTitle11: "Мои Детские Травмы 4 (анимация)",
+                videoStats11: "122 089 просмотров • 7 часов назад",
+                videoTitle12: "Губка Боб Квадратные Штаны | 1 сезон 8 серия | Nickelodeon Россия",
+                videoStats12: "33 млн просмотров • 7 лет назад",
+                videoTitle13: "КАК ОБЫГРАТЬ ЛОХОТРОНЫ, КОТОРЫЕ СТОЯТ В ПАРКАХ?",
+                videoStats13: "16 млн просмотров • 5 лет назад",
+                videoTitle14: "Безумный Half-Life 2 с модами",
+                videoStats14: "2,3 млн просмотров • 6 месяцев назад",
+                videoTitle15: "Я так больше не могу... [Минус 4 ролика в месяц]",
+                videoStats15: "1 млн просмотров • 2 дня назад",
+                logoutMessage: "Вы успешно вышли из аккаунта.",
+                loginError: "Ошибка входа. Попробуйте еще раз.",
+                logoutError: "Ошибка выхода. Попробуйте еще раз."
+            }
+        };
+
+        const setLanguage = (lang) => {
+            document.documentElement.lang = lang;
+            document.getElementById("search-input").placeholder = translations[lang].searchPlaceholder;
+            document.getElementById("login-btn").textContent = translations[lang].login;
+            menuChannelName.textContent = translations[lang].noChannel;
+            document.getElementById("view-channel-link").textContent = translations[lang].viewChannel;
+            document.getElementById("google-account").textContent = translations[lang].googleAccount;
+            document.getElementById("switch-account").textContent = translations[lang].switchAccount;
+            document.getElementById("logout-text").textContent = translations[lang].logout;
+            document.getElementById("youtube-studio").textContent = translations[lang].youtubeStudio;
+            document.getElementById("purchases").textContent = translations[lang].purchases;
+            document.getElementById("your-data").textContent = translations[lang].yourData;
+            document.getElementById("theme").textContent = translations[lang].theme;
+            document.getElementById("language-label").textContent = translations[lang].languageLabel;
+            document.getElementById("safe-mode").textContent = translations[lang].safeMode;
+            document.getElementById("country").textContent = translations[lang].country;
+            document.getElementById("shortcuts").textContent = translations[lang].shortcuts;
+            document.getElementById("settings").textContent = translations[lang].settings;
+            document.getElementById("help").textContent = translations[lang].help;
+            document.getElementById("feedback").textContent = translations[lang].feedback;
+            document.getElementById("sidebar-home").textContent = translations[lang].sidebarHome;
+            document.getElementById("sidebar-shorts").textContent = translations[lang].sidebarShorts;
+            document.getElementById("sidebar-subscriptions").textContent = translations[lang].sidebarSubscriptions;
+            document.getElementById("sidebar-library").textContent = translations[lang].sidebarLibrary;
+            document.getElementById("sidebar-history").textContent = translations[lang].sidebarHistory;
+            document.getElementById("sidebar-your-videos").textContent = translations[lang].sidebarYourVideos;
+            document.getElementById("sidebar-watch-later").textContent = translations[lang].sidebarWatchLater;
+            document.getElementById("sidebar-popular").textContent = translations[lang].sidebarPopular;
+            document.getElementById("sidebar-music").textContent = translations[lang].sidebarMusic;
+            document.getElementById("sidebar-gaming").textContent = translations[lang].sidebarGaming;
+            document.getElementById("sidebar-movies").textContent = translations[lang].sidebarMovies;
+            document.getElementById("sidebar-you").textContent = translations[lang].sidebarYou;
+            document.getElementById("nav-all").textContent = translations[lang].navAll;
+            document.getElementById("nav-videos").textContent = translations[lang].navVideos;
+            document.getElementById("nav-music").textContent = translations[lang].navMusic;
+            document.getElementById("nav-news").textContent = translations[lang].navNews;
+            document.getElementById("nav-shorts-saves").textContent = translations[lang].navShortsSaves;
+            document.getElementById("nav-live").textContent = translations[lang].navLive;
+            document.getElementById("nav-movies").textContent = translations[lang].navMovies;
+            for (let i = 1; i <= 15; i++) {
+                document.getElementById(`video-title-${i}`).textContent = translations[lang][`videoTitle${i}`];
+                document.getElementById(`video-stats-${i}`).textContent = translations[lang][`videoStats${i}`];
+            }
+        };
+
+        const languageSelect = document.getElementById("language-select");
+        languageSelect.addEventListener("change", (e) => {
+            const selectedLang = e.target.value;
+            setLanguage(selectedLang);
+            localStorage.setItem("language", selectedLang);
+        });
+
+        const savedLang = localStorage.getItem("language") || "uk";
+        languageSelect.value = savedLang;
+        setLanguage(savedLang);
+
         const toggleMenu = () => {
             userMenu.style.display = userMenu.style.display === "block" ? "none" : "block";
         };
@@ -1004,12 +1193,14 @@
             e.preventDefault();
             signOut(auth)
                 .then(() => {
-                    alert("Ви успішно вийшли з облікового запису.");
+                    const lang = document.documentElement.lang;
+                    alert(translations[lang].logoutMessage);
                     userMenu.style.display = "none";
                 })
                 .catch((error) => {
                     console.error("Помилка виходу:", error);
-                    alert("Помилка виходу. Спробуйте ще раз.");
+                    const lang = document.documentElement.lang;
+                    alert(translations[lang].logoutError);
                 });
         });
 
@@ -1017,7 +1208,7 @@
             if (user) {
                 loginBtn.style.display = "none";
                 userContainer.style.display = "flex";
-                menuChannelName.textContent = user.displayName || "Ви ще не створили канал";
+                menuChannelName.textContent = user.displayName || translations[document.documentElement.lang].noChannel;
                 menuAccountName.textContent = `@${user.email.split('@')[0]}`;
                 userAvatar.style.backgroundImage = user.photoURL ? `url(${user.photoURL})` : `url('https://cdn-icons-png.flaticon.com/128/149/149071.png')`;
             } else {
@@ -1034,7 +1225,8 @@
                 })
                 .catch((error) => {
                     console.error("Помилка входу:", error);
-                    alert("Помилка входу. Спробуйте ще раз.");
+                    const lang = document.documentElement.lang;
+                    alert(translations[lang].loginError);
                 });
         });
     </script>
