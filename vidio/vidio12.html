@@ -1,6 +1,18 @@
-<!DOCTYPE html>
 <html lang="ru">
+
 <head>
+    <style>
+        body {
+            transition: opacity ease-in 0.2s;
+        }
+
+        body[unresolved] {
+            opacity: 0;
+            display: block;
+            overflow: hidden;
+            position: relative;
+        }
+    </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Видео страница</title>
@@ -188,7 +200,9 @@
             color: #aaa;
         }
     </style>
+    <link rel="stylesheet" href="chrome-extension://ihcjicgdanjaechkgeegckofjjedodee/app/content-style.css">
 </head>
+
 <body>
     <!-- Верхняя панель -->
     <div class="header">
@@ -209,27 +223,32 @@
             <!-- Плейсхолдер для видео -->
             <div class="video-player">
                 <!-- Вставьте сюда ваш iframe или видео -->
-                <iframe width="1431" height="805" src="https://www.youtube.com/embed/73M6_VOnZU4" title="😱Майнкрафт, но с Каждой Смертью Становишься СТРАШНЕЕ.." frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <iframe width="1239" height="697"
+                    src="https://www.youtube.com/embed/qjufkgTajeU?list=PLBw9A4x6VLP2MauHJkwSisDxAAQfaUL3W"
+                    title="Губка Боб Квадратные Штаны | 1 сезон 8 серия | Nickelodeon Россия" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
             </div>
 
             <!-- Информация о видео -->
             <div class="video-info">
-                <h1>😱Майнкрафт, но с Каждой Смертью Становишься СТРАШНЕЕ..</h1>
+                <h1>Губка Боб Квадратные Штаны | 1 сезон 8 серия | Nickelodeon Россия</h1>
                 <div class="video-meta">
                     <div class="channel">
-                        <img src="https://yt3.ggpht.com/pwjrFes5-0Ig3XM6NRrzBGlV4frvpaeoSkC1aMdher1hMWZJxL6ZlNcB3gjtqti_3shpJNRI=s48-c-k-c0x00ffffff-no-rj" alt="Channel Icon">
-                        <span>FixEye</span>
+                        <img src="https://yt3.ggpht.com/rhibxHMYX7stOQKUvclm1NT-4LOt6YJ0zseQx7SAuOY8_Mr8WLq0QDPdV-UM99yxE8I14IST=s48-c-k-c0x00ffffff-no-rj"
+                            alt="Channel Icon">
+                        <span>Nickelodeon Cyrillic</span>
                     </div>
-                    <span>2,8 млн просмотров • 1 год назад</span>
+                    <span>33 млн просмотров • 7 лет назад</span>
                 </div>
                 <div class="video-actions">
-                    <button>👍 378 тыс.</button>
+                    <button>👍 183 тыс.</button>
                     <button>Поделиться</button>
                     <button>Скачать</button>
                     <button>Сохранить</button>
                 </div>
                 <div class="comments">
-                    <p>69 976 КОММЕНТАРИЕВ</p>
+                    <p>Комментарии отключены.</p>
                 </div>
             </div>
         </div>
@@ -266,5 +285,27 @@
             </div>
         </div>
     </div>
+
+
+    <veepn-guard-alert>
+        <style>
+            @font-face {
+                font-family: FigtreeVF;
+                src: url(chrome-extension://majdfhpaihoncoakbjgbdhglocklcgno/fonts/FigtreeVF.woff2) format("woff2 supports variations"), url(chrome-extension://majdfhpaihoncoakbjgbdhglocklcgno/fonts/FigtreeVF.woff2) format("woff2-variations");
+                font-weight: 100 1000;
+                font-display: swap
+            }
+        </style>
+    </veepn-guard-alert><veepn-lock-screen>
+        <style>
+            @font-face {
+                font-family: FigtreeVF;
+                src: url(chrome-extension://majdfhpaihoncoakbjgbdhglocklcgno/fonts/FigtreeVF.woff2) format("woff2 supports variations"), url(chrome-extension://majdfhpaihoncoakbjgbdhglocklcgno/fonts/FigtreeVF.woff2) format("woff2-variations");
+                font-weight: 100 1000;
+                font-display: swap
+            }
+        </style>
+    </veepn-lock-screen>
 </body>
+
 </html>
