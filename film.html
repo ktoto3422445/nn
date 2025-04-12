@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/128/1384/1384060.png">
+    <title>Youtube</title>
+    <style>
+        .movie-container {
+            padding: 20px;
+            background: #111;
+            color: #fff;
+            font-family: sans-serif;
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        .movie-container h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .movie-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: flex-start;
+        }
+
+        .movie-card {
+            width: 200px;
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            position: relative;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            transition: transform 0.2s; /* Додано для плавної анімації */
+        }
+
+        .movie-card:hover {
+            transform: translateY(-5px); /* Ефект підняття при наведенні */
+        }
+
+        .movie-info {
+            position: absolute;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            width: 100%;
+            padding: 8px;
+            font-size: 13px;
+            color: white;
+        }
+
+        .movie-buy {
+            display: block;
+            color: #0f0;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 1300px) {
+            .movie-card {
+                width: calc((100% - 100px) / 5);
+            }
+        }
+
+        @media (max-width: 1100px) {
+            .movie-card {
+                width: calc((100% - 80px) / 4);
+            }
+        }
+
+        @media (max-width: 800px) {
+            .movie-card {
+                width: calc((100% - 60px) / 3);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .movie-card {
+                width: calc((100% - 40px) / 2);
+            }
+        }
+
+        @media (max-width: 400px) {
+            .movie-card {
+                width: 100%;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: #0f0f0f;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            width: 100%;
+            min-height: 3.5rem;
+            background-color: #212121;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .header-left,
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .menu-icon {
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .logo img {
+            height: 1.5rem;
+            width: auto;
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 40%;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 0.5rem;
+            background-color: #121212;
+            border: 1px solid #303030;
+            border-right: none;
+            border-radius: 2px 0 0 2px;
+            color: #fff;
+            font-size: 0.875rem;
+        }
+
+        .search-btn {
+            padding: 0.5rem 1rem;
+            background-color: #303030;
+            border: 1px solid #303030;
+            border-radius: 0 2px 2px 0;
+            cursor: pointer;
+            color: #fff;
+        }
+
+        .icon {
+            width: 1.5rem;
+            height: 1.5rem;
+            cursor: pointer;
+        }
+
+        .login-btn {
+            padding: 0.5rem 1rem;
+            background-color: #065fd4;
+            color: #fff;
+            border: none;
+            border-radius: 2px;
+            font-size: 0.875rem;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .user-container {
+            position: relative;
+            display: none;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .user-avatar {
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            background-color: #aaa;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .user-menu {
+            position: absolute;
+            top: 2.5rem;
+            right: 0;
+            width: clamp(15rem, 90vw, 18.75rem);
+            background-color: #212121;
+            border-radius: 0.625rem;
+            overflow: hidden;
+            z-index: 20;
+            display: none;
+        }
+
+        .section {
+            border-bottom: 1px solid #3c3c3c;
+            padding: 0.625rem 0;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .user-info {
+            padding: 0.625rem 1rem;
+        }
+
+        .user-info p {
+            margin: 0.125rem 0;
+        }
+
+        .user-info a {
+            color: #3ea6ff;
+            text-decoration: none;
+            font-size: 0.875rem;
+        }
+
+        .item {
+            padding: 0.625rem 1rem;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .item:hover {
+            background-color: #383838;
+        }
+
+        .material-icons {
+            font-size: 1.25rem;
+            color: #aaa;
+            margin-right: 1rem;
+        }
+
+        .sidebar {
+            width: clamp(4.5rem, 15vw, 15rem);
+            background-color: #212121;
+            position: fixed;
+            top: 3.5rem;
+            bottom: 0;
+            padding: 0.75rem;
+            overflow-y: auto;
+            transition: width 0.3s;
+        }
+
+        .sidebar-item {
+            padding: 0.75rem 1rem;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            color: #fff;
+            cursor: pointer;
+            gap: 1rem;
+        }
+
+        .sidebar-item.active {
+            background-color: #383838;
+        }
+
+        .sidebar-item:hover {
+            background-color: #303030;
+        }
+
+        @media (max-width: 900px) {
+            .sidebar {
+                width: 72px;
+            }
+
+            .sidebar-item span {
+                display: none;
+            }
+
+            .sidebar-item img {
+                margin-right: 0;
+            }
+
+            main {
+                margin-left: 72px;
+            }
+
+            .search-bar {
+                margin: 0 8px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .sidebar {
+                display: none;
+            }
+
+            main {
+                margin-left: 0;
+            }
+
+            .search-bar input {
+                width: 120px;
+            }
+
+            .header-right .icon {
+                display: none;
+            }
+
+            .profile-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .channel-icon-large {
+                margin-bottom: 16px;
+            }
+
+            .profile-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .customize-btn,
+            .manage-videos-btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        .sidebar {
+            width: clamp(4.5rem, 15vw, 15rem);
+            background-color: #212121;
+            position: fixed;
+            top: 3.5rem;
+            bottom: 0;
+            padding: 0.75rem;
+            overflow-y: auto;
+            transition: width 0.3s;
+        }
+
+        .sidebar-item {
+            padding: 0.75rem 1rem;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            gap: 1rem;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background 0.3s;
+        }
+
+        .sidebar-item img {
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
+            filter: invert(100%);
+        }
+
+        .sidebar-item.active {
+            background-color: #3f3f3f;
+            font-weight: bold;
+        }
+
+        .sidebar-item:hover {
+            background-color: #333;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #303030;
+            margin: 0.5rem 0;
+        }
+
+        main {
+            margin-left: clamp(4.5rem, 15vw, 15rem);
+            margin-top: 3.5rem;
+            padding: 1.5rem;
+            flex: 1;
+            transition: margin-left 0.3s;
+        }
+
+        .nav-bar {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .nav-item {
+            padding: 0.5rem 1rem;
+            background-color: #303030;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+        }
+
+        .nav-item.active {
+            background-color: #fff;
+            color: #0f0f0f;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .video-card {
+            width: 100%;
+        }
+
+        .thumbnail {
+            width: 10%;
+            padding-bottom: 56.25%;
+            background-color: #ccc;
+            margin-bottom: 0.5rem;
+        }
+
+        .video-info {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .channel-icon {
+            width: 2.25rem;
+            height: 2.25rem;
+            background-color: #aaa;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .video-details h3 {
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .video-details p {
+            font-size: 0.75rem;
+            color: #aaa;
+        }
+
+        .shorts-section h2 {
+            font-size: 1.125rem;
+            margin: 1.5rem 0 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .shorts-grid {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+        }
+
+        .shorts-card {
+            width: clamp(9rem, 20vw, 12.5rem);
+        }
+
+        .shorts-thumbnail {
+            width: 100%;
+            padding-bottom: 177.78%;
+            background-color: #ccc;
+            margin-bottom: 0.5rem;
+        }
+
+        .shorts-card h3 {
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .shorts-card p {
+            font-size: 0.75rem;
+            color: #aaa;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 4.5rem;
+            }
+
+            .sidebar-item {
+                justify-content: center;
+                font-size: 0;
+            }
+
+            main {
+                margin-left: 4.5rem;
+            }
+
+            .search-bar {
+                max-width: 60%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 0.5rem;
+                min-height: auto;
+            }
+
+            .search-bar {
+                max-width: 100%;
+                order: 3;
+                margin: 0.5rem 0;
+            }
+
+            .sidebar {
+                display: none;
+            }
+
+            main {
+                margin-left: 0;
+            }
+
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background 0.3s;
+        }
+
+        .sidebar-item img {
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
+        }
+
+        .sidebar-item:hover {
+            background-color: #333;
+        }
+
+        .sidebar-item.active {
+            background-color: #3f3f3f;
+            font-weight: bold;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .video-card {
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .thumbnail {
+            display: block;
+            width: 300px;
+            height: 70px;
+        }
+
+        .thumbnail img {
+            width: 265px;
+            height: 165px;
+        }
+
+        .video-info {
+            display: flex;
+            gap: 10px;
+            padding: 10px;
+        }
+
+        .channel-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .video-card {
+            background-color: transparent;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .thumbnail {
+            display: block;
+            width: 100%;
+            padding-bottom: 56.25%;
+            position: relative;
+            background-color: #ccc;
+        }
+
+        .thumbnail img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .video-info {
+            display: flex;
+            gap: 10px;
+            padding: 10px 0;
+        }
+
+        .channel-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .video-details h3 {
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+
+        .video-details h3 a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .video-details h3 a:hover {
+            text-decoration: underline;
+        }
+
+        .video-details p {
+            font-size: 14px;
+            color: #aaa;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 768px) {
+            .video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header-left">
+            <div class="menu-icon">☰</div>
+            <div class="logo">
+                <img src="https://www.youtube.com/" style="width: 10px; height: 10px;">
+            </div>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Пошук">
+            <button class="search-btn"><img src="https://images.icon-icons.com/2621/PNG/96/gui_search_icon_157039.png" alt="Пошук" style="width: 30px; height: 30px;"></button>
+        </div>
+        <div class="header-right">
+            <div>
+                <img src="https://cdn-icons-png.flaticon.com/128/7322/7322162.png" class="icon">
+            </div>
+            <button class="login-btn" id="login-btn">Увійти</button>
+            <div class="user-container" id="user-container">
+                <div class="user-avatar" id="user-avatar"></div>
+                <div class="user-menu" id="user-menu">
+                    <div class="section user-info">
+                        <p><strong id="menu-channel-name">Вы ещё не создали канал</strong></p>
+                        <p id="menu-account-name"></p>
+                        <a href="https://ktoto342244.github.io/nn/profile.html">Переглянути канал</a>
+                    </div>
+                    <div class="section">
+                        <a href="https://myaccount.google.com" target="_blank" class="item">
+                            <span class="material-icons">account_circle</span>Аккаунт Google
+                        </a>
+                        <div class="item"><span class="material-icons">switch_account</span>Змінити акаунт</div>
+                        <div class="item" id="logout-link"><span class="material-icons">logout</span>Вийти</div>
+                    </div>
+                    <div class="section">
+                        <a href="https://ktoto342244.github.io/nn/studioyoutube.html" class="item">
+                            <span class="material-icons">video_settings</span>Творча студія YouTube
+                        </a>
+                        <div class="item"><span class="material-icons">paid</span>Покупки і платні підписки</div>
+                    </div>
+                    <div class="section">
+                        <a href="https://ktoto342244.github.io/nn/profile.html" class="item">
+                            <span class="material-icons">person</span>Ваші дані на YouTube
+                        </a>
+                        <div class="item"><span class="material-icons">brightness_6</span>Тема: як на пристрої</div>
+                        <div class="item"><span class="material-icons">language</span>Мова: Русский</div>
+                        <div class="item"><span class="material-icons">visibility_off</span>Безпечний режим: вимк.</div>
+                        <div class="item"><span class="material-icons">flag</span>Країна: Україна</div>
+                        <div class="item"><span class="material-icons">keyboard</span>Швидкі клавіші</div>
+                    </div>
+                    <div class="section">
+                        <div class="item"><span class="material-icons">settings</span>Налаштування</div>
+                        <div class="item"><span class="material-icons">help</span>Довідка</div>
+                        <div class="item"><span class="material-icons">feedback</span>Надіслати відгук</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="sidebar">
+        <a href="https://ktoto342244.github.io/nn/" class="sidebar-item" style="text-decoration: none;">
+            <img src="https://img.icons8.com/ios-filled/50/000000/home.png" alt="Головна"
+                style="width:16px; height:16px; vertical-align:middle; margin-right:5px;">Головна
+        </a>
+        <a href="#" class="sidebar-item" style="text-decoration: none;">
+            <img src="https://img.icons8.com/color/48/youtube-shorts.png" alt="Shorts"
+                style="width:16px; height:16px; vertical-align:middle; margin-right:5px;">Shorts
+        </a>
+        <a href="#" class="sidebar-item" style="text-decoration: none;">
+            <img src="https://img.icons8.com/ios-filled/50/000000/subscription.png" alt="Підписки"
+                style="width:16px; height:16px; vertical-align:middle; margin-right:5px;">Підписки
+        </a>
+        <a href="#" class="sidebar-item" style="text-decoration: none;">
+            <img src="https://img.icons8.com/ios-filled/50/000000/library.png" alt="Бібліотека"
+                style="width:16px; height:16px; vertical-align:middle; margin-right:5px;">Бібліотека
+        </a>
+        <hr>
+        <a href="#" class="sidebar-item" style="text-decoration: none;">
+            <img src="https://img.icons8.com/ios-filled/50/000000/time-machine.png" alt="Історія"
+                style="width:16px; height:16px; vertical-align:middle; margin-right:5px;">Історія
+        </a>
+        <a href="#" class="sidebar-item" style="text-decoration: none;">
+            <img src="https://img.icons8.com/ios-filled/50/000000/video.png" alt="Ваші відео"
+                style="width:16px; height:16px; vertical-align:middle; margin-right:5px;">Ваші відео
+        </a>
+        <a href="#" class="sidebar-item" style="text-decoration: none;">
+            <img src="https://img.icons8.com/ios-filled/50/000000/watch-later.png" alt="Переглянути пізніше"
+                style="width:16px; height:16px; vertical-align:middle; margin-right:5px;">Переглянути пізніше
+        </a>
+        <hr>
+         <a href="https://ktoto342244.github.io/nn/papularyri.html" class="sidebar-item" style="text-decoration: none;">
+            <img src="https://cdn-icons-png.flaticon.com/512/346/346880.png" alt="films"
+                style="width:16px; height:16px; vertical-align:middle; margin-right:5px;">Популярно
+        </a>
+        <a href="#" class="sidebar-item" style="text-decoration: none;">
+            <img src="https://img.icons8.com/ios-filled/50/000000/musical-notes.png" alt="Музика"
+                style="width:16px; height:16px; vertical-align:middle; margin-right:5px;">Музика
+        </a>
+        <a href="#" class="sidebar-item" style="text-decoration: none;">
+            <img src="https://img.icons8.com/ios-filled/50/000000/controller.png" alt="Відеоігри"
+                style="width:16px; height:16px; vertical-align:middle; margin-right:5px;">Відеоігри
+        </a>
+        <a href="https://ktoto342244.github.io/nn/film.html" class="sidebar-item" style="text-decoration: none;">
+            <img src="https://img.icons8.com/ios-filled/50/000000/films.png" alt="films"
+                style="width:16px; height:16px; vertical-align:middle; margin-right:5px;">Фільми
+        </a>
+        <a href="https://ktoto342244.github.io/nn/profile.html" class="sidebar-item" id="profile-link">
+            <img src="https://cdn-icons-png.flaticon.com/128/309/309492.png" alt="icon">
+            <span>Ви</span>
+        </a>
+    </div>
+
+    <div class="movie-container">
+        <h2>🎬 Фільми</h2>
+        <div class="movie-grid">
+            <div class="movie-card"
+                style="background-image: url('https://upload.wikimedia.org/wikipedia/en/a/a0/A_Quiet_Place_film_poster.png');">
+                <div class="movie-info">
+                    <h4>A Quiet Place</h4>
+                    <p>Драма/Жахи • 2018</p>
+                    <span class="movie-buy">Купити або взяти напрокат</span>
+                </div>
+            </div>
+
+            <div class="movie-card"
+                style="background-image: url('https://upload.wikimedia.org/wikipedia/ru/b/b4/%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D1%82%D0%B5%D0%BB%D1%8C_%282023%29.jpg');">
+                <div class="movie-info">
+                    <h4>Создатель</h4>
+                    <p>Фантастика/Екшн • 2023</p>
+                    <span class="movie-buy">Купити або взяти напрокат</span>
+                </div>
+            </div>
+
+            <div class="movie-card"
+                style="background-image: url('https://upload.wikimedia.org/wikipedia/ru/thumb/1/18/%D0%A1%D1%83%D0%B1%D1%81%D1%82%D0%B0%D0%BD%D1%86%D0%B8%D1%8F_%28%D1%84%D0%B8%D0%BB%D1%8C%D0%BC%29.webp/300px-%D0%A1%D1%83%D0%B1%D1%81%D1%82%D0%B0%D0%BD%D1%86%D0%B8%D1%8F_%28%D1%84%D0%B8%D0%BB%D1%8C%D0%BC%29.webp.png');">
+                <div class="movie-info">
+                    <h4>Субстанция</h4>
+                    <p>Жахи/Фантастика • 2024</p>
+                    <span class="movie-buy">Купити або взяти напрокат</span>
+                </div>
+            </div>
+
+            <div class="movie-card"
+                style="background-image: url('https://staticeu.sweet.tv/images/cache6/posters/BDGPWAISAJZHKKQCBABA====/306325-mufasa-korol-lev.jpg');">
+                <div class="movie-info">
+                    <h4>Муфаса</h4>
+                    <p>Пригоди/Мюзикл • 2024</p>
+                    <span class="movie-buy">Купити або взяти напрокат</span>
+                </div>
+            </div>
+
+            <div class="movie-card"
+                style="background-image: url('https://kinokrad.my/uploads/mini/poster/37/28d6a26fd02323b7e915a82e9de0ba.jpg');">
+                <div class="movie-info">
+                    <h4>Ущелье</h4>
+                    <p>Жахи/Триллер • 2025</p>
+                    <span class="movie-buy">Купити або взяти напрокат</span>
+                </div>
+            </div>
+
+            <div class="movie-card"
+                style="background-image: url('https://lux.fm/uploads/media_news/2022/06/62b5ba16a5e39140091020.jpg?w=400&fit=cover&output=webp&q=85');">
+                <div class="movie-info">
+                    <h4>Затерянный Город</h4>
+                    <p>Пригоди/Екшн • 2022</p>
+                    <span class="movie-buy">Купити або взяти напрокат</span>
+                </div>
+            </div>
+
+            <div class="movie-card"
+                style="background-image: url('https://avatars.mds.yandex.net/get-kinopoisk-image/4716873/1cdad7aa-8083-4999-a278-dfa8bab9fa9a/600x900');">
+                <div class="movie-info">
+                    <h4>Хищние Земли</h4>
+                    <p>Екшн/Трилер • 2024</p>
+                    <span class="movie-buy">Купити або взяти напрокат</span>
+                </div>
+            </div>
+
+            <div class="movie-card"
+                style="background-image: url('https://images.justwatch.com/poster/304457584/s718/dzhon-uik-4.jpg');">
+                <div class="movie-info">
+                    <h4>Джон Уик 4</h4>
+                    <p>Екшн/Боевик • 2023</p>
+                    <span class="movie-buy">Купити або взяти напрокат</span>
+                </div>
+            </div>
+
+            <div class="movie-card"
+                style="background-image: url('https://upload.wikimedia.org/wikipedia/ru/e/e6/Pacific_Rim.jpg');">
+                <div class="movie-info">
+                    <h4>Тихоокеанский рубеж</h4>
+                    <p>Екшн/НФ • 2013</p>
+                    <span class="movie-buy">Купити або взяти напрокат</span>
+                </div>
+            </div>
+
+            <div class="movie-card"
+                style="background-image: url('https://upload.wikimedia.org/wikipedia/ru/8/86/Real-Steel.jpg');">
+                <div class="movie-info">
+                    <h4>Живая Сталь</h4>
+                    <p>НФ/Екшн • 2011</p>
+                    <span class="movie-buy">Купити або взяти напрокат</span>
+                </div>
+            </div>
+
+            <div class="movie-card"
+                style="background-image: url('https://thumbs.dfs.ivi.ru/storage8/contents/4/1/e288daae8da20848a1db42de703756.jpg/163x250/?q=85');">
+                <div class="movie-info">
+                    <h4>Переводчик</h4>
+                    <p>Екшн/Воєнний • 2023</p>
+                    <span class="movie-buy">Купити або взяти напрокат</span>
+                </div>
+            </div>
+
+            <div class="movie-card"
+                style="background-image: url('https://avatars.mds.yandex.net/get-kinopoisk-image/1946459/5ae82f4b-fd6a-46b5-b5ba-897106eb1eae/220x330');">
+                <div class="movie-info">
+                    <h4>Первому игроку приготовиться</h4>
+                    <p>Наукова фантастика/Екшн • 2018</p>
+                    <span class="movie-buy">Купити або взяти напрокат</span>
+                </div>
+            </div>
+
+            <div class="movie-card"
+                style="background-image: url('https://avatars.mds.yandex.net/get-kinopoisk-image/10812607/7ae661a4-8d36-4fad-9278-9b63655c7eb3/220x330');">
+                <div class="movie-info">
+                    <h4>Minecraft</h4>
+                    <p>Пригоди/Екшн • 2025</p>
+                    <span class="movie-buy">Купити або взяти напрокат</span>
+                </div>
+            </div>
+
+            <div class="movie-card"
+                style="background-image: url('https://ixbt.online/live/images/original/29/78/54/2024/04/14/da4c68d12c.webp');">
+                <div class="movie-info">
+                    <h4>Пчеловод</h4>
+                    <p>Екшн/Трилер • 2024</p>
+                    <span class="movie-buy">Купити або взяти напрокат</span>
+                </div>
+            </div>
+
+            <div class="movie-card"
+                style="background-image: url('https://kinobar.im/uploads/posts/2025-01/1735821896_3.jpg');">
+                <div class="movie-info">
+                    <h4>Грань Будущего</h4>
+                    <p>НФ/Екшн • 2014</p>
+                    <span class="movie-buy">Купити або взяти напрокат</span>
+                </div>
+            </div>
+
+            <div class="movie-card"
+                style="background-image: url('https://ru-images.kinorium.com/movie/1080/1708456.jpg?1735389137');">
+                <div class="movie-info">
+                    <h4>Гладиатор 2</h4>
+                    <p>Екшн/Пригоди • 2024</p>
+                    <span class="movie-buy">Купити або взяти напрокат</span>
+                </div>
+            </div>
+
+            <div class="movie-card"
+                style="background-image: url('https://avatars.mds.yandex.net/get-kinopoisk-image/10953618/2a9d3fb5-0113-4fa4-b2dd-74ed7e280d20/220x330');">
+                <div class="movie-info">
+                    <h4>Как приручить дракона</h4>
+                    <p>Дитячий/Пригоди</p>
+                    <p>Дата Выхода • 2025</p>
+                    <span class="movie-buy">Посмотреть трейлер</span>
+                </div>
+            </div>
+
+            <div class="movie-card"
+                style="background-image: url('https://upload.wikimedia.org/wikipedia/ru/thumb/9/9f/Rampage_%28film%29.jpg/250px-Rampage_%28film%29.jpg');">
+                <div class="movie-info">
+                    <h4>Рэмпедж</h4>
+                    <p>Екшн/Нф • 2018</p>
+                    <span class="movie-buy">Купити або взяти напрокат</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

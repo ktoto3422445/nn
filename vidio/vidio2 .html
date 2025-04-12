@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Видео страница</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #181818;
+            color: #fff;
+        }
+
+        /* Верхняя панель */
+        .header {
+            background-color: #212121;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff0000;
+        }
+
+        .header .search-bar {
+            flex: 1;
+            max-width: 600px;
+            display: flex;
+            align-items: center;
+            margin: 0 20px;
+        }
+
+        .header .search-bar input {
+            width: 100%;
+            padding: 8px;
+            border: none;
+            border-radius: 2px 0 0 2px;
+            background-color: #333;
+            color: #fff;
+        }
+
+        .header .search-bar button {
+            padding: 8px 16px;
+            background-color: #444;
+            border: none;
+            border-radius: 0 2px 2px 0;
+            cursor: pointer;
+        }
+
+        .header .user-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .header .user-actions button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        /* Основной контейнер */
+        .container {
+            display: flex;
+            padding: 20px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .main-content {
+            flex: 3;
+            margin-right: 20px;
+        }
+
+        .video-player {
+            width: 100%;
+            height: 500px;
+            background-color: #333;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .video-player iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-info {
+            margin-top: 10px;
+        }
+
+        .video-info h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .video-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+
+        .video-meta .channel {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .video-meta .channel img {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+        }
+
+        .video-actions {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .video-actions button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .video-actions button:hover {
+            background-color: #555;
+        }
+
+        .comments {
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        /* Боковая панель */
+        .sidebar {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .recommended-video {
+            display: flex;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .recommended-video img {
+            width: 120px;
+            height: 80px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .recommended-video h3 {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .recommended-video p {
+            font-size: 12px;
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+    <!-- Верхняя панель -->
+    <div class="header">
+        <div class="logo">YouTube</div>
+        <div class="search-bar">
+            <input type="text" placeholder="Введите запрос">
+            <button>🔍</button>
+        </div>
+        <div class="user-actions">
+            <button>Войти</button>
+        </div>
+    </div>
+
+    <!-- Основной контейнер -->
+    <div class="container">
+        <!-- Основной контент -->
+        <div class="main-content">
+            <!-- Плейсхолдер для видео -->
+            <div class="video-player">
+                <!-- Вставьте сюда ваш iframe или видео -->
+                <iframe width="1840" height="1035" src="https://www.youtube.com/embed/T0SlTdREUIo" title="САМЫЙ МОЩНЫЙ АППАРАТ ДЛЯ САХАРНОЙ ВАТЫ С МАМИКСОМ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+
+            <!-- Информация о видео -->
+            <div class="video-info">
+                <h1>САМЫЙ МОЩНЫЙ АППАРАТ ДЛЯ САХАРНОЙ ВАТЫ С МАМИКСОМ</h1>
+                <div class="video-meta">
+                    <div class="channel">
+                        <img src="https://yt3.ggpht.com/ytc/AIdro_lgZSW_3-BTK3Eh4etEOXijHcOhmwVDwNrRq69ZMFTJrmQ=s48-c-k-c0x00ffffff-no-rj" alt="Channel Icon">
+                        <span>SuperCrastan</span>
+                    </div>
+                    <span>767 тыс. просмотров • 1 месяц назад</span>
+                </div>
+                <div class="video-actions">
+                    <button>👍 44 тыс.</button>
+                    <button>Поделиться</button>
+                    <button>Скачать</button>
+                    <button>Сохранить</button>
+                </div>
+                <div class="comments">
+                    <p>3 076 КОММЕНТАРИЕВ</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Боковая панель с рекомендациями -->
+        <div class="sidebar">
+            <div class="recommended-video">
+                <img src="https://via.placeholder.com/120x80" alt="Thumbnail">
+                <div>
+                    <h3>ЧЕРИЧ РАБОТАЕТ НА...</h3>
+                    <p>Дима Масленников • 1,3 млн просмотров</p>
+                </div>
+            </div>
+            <div class="recommended-video">
+                <img src="https://via.placeholder.com/120x80" alt="Thumbnail">
+                <div>
+                    <h3>ВОТ ТЫ И ПОПАЛСЯ...</h3>
+                    <p>Дима Масленников • 1,7 млн просмотров</p>
+                </div>
+            </div>
+            <div class="recommended-video">
+                <img src="https://via.placeholder.com/120x80" alt="Thumbnail">
+                <div>
+                    <h3>ЭТО ТЫ ИСКАЛ! РАБОЧИЙ...</h3>
+                    <p>Дима Масленников • 1,2 млн просмотров</p>
+                </div>
+            </div>
+            <div class="recommended-video">
+                <img src="https://via.placeholder.com/120x80" alt="Thumbnail">
+                <div>
+                    <h3>КТО СИДИТ В ТЕМНОТЕ...</h3>
+                    <p>Дима Масленников • 900 тыс. просмотров</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
